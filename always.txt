@@ -1,0 +1,7 @@
+mkdir ch22
+cd ch22
+virtualenv venv
+source venv/bin/activate
+pip install django
+django-admin startproject ch22 .
+python manage.py startapp 

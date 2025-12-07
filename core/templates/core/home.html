@@ -1,0 +1,201 @@
+{% extends "core/base.html" %}
+{% block title %}Home | PumpPay{% endblock title %}
+
+{% block content %}
+
+<div class="home-container">
+    <header class="hero-section">
+        <h1 class="home-title">
+            <span class="brand-highlight">PumpPay</span>: Fueling a <br>
+            **Faster, Smarter** Way to Pay
+        </h1>
+        <p class="home-subtitle">
+            Your one-stop solution for **seamless petrol pump payments** using secure QR codes.
+        </p>
+
+        <div class="cta-buttons">
+            <a href="{% url 'generate_qr' %}" class="cta-btn primary-cta">
+                ⛽ Generate QR Code
+            </a>
+            <a href="{% url 'scan_qr' %}" class="cta-btn secondary-cta">
+                💳 Scan & Pay Now
+            </a>
+        </div>
+    </header>
+
+    <section class="features-section">
+        <h2 class="section-title">Why Choose PumpPay?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="icon">⚡</span>
+                <h3>Lightning-Fast Payments</h3>
+                <p>Scan, pay, and go — drastically cut down on waiting time, getting you back on the road faster.</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🔒</span>
+                <h3>Ironclad Security</h3>
+                <p>All transactions are protected with state-of-the-art encryption for your absolute peace of mind.</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">📱</span>
+                <h3>Universal QR Access</h3>
+                <p>Generate or scan QR codes in seconds, ensuring smooth and consistent transactions every time.</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+{% endblock %}
+
+{% block extra_head %}
+
+<style>
+/* New and Updated Styles */
+
+/* Overall Container - Wider and more prominent */
+.home-container {
+    background: #f4f7f9; /* Light background for the whole page/container */
+    padding: 0; /* Remove padding here, use it in sections */
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #1abc9c, #16a085); /* Strong gradient background */
+    color: white;
+    padding: 80px 25px;
+    border-radius: 0 0 15px 15px; /* Rounded bottom corners */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    margin-bottom: 50px;
+}
+
+.home-title {
+    font-size: 3.5rem; /* Larger font */
+    color: white; /* Title color is white on the dark background */
+    margin-bottom: 10px;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.brand-highlight {
+    color: #ffd43b; /* Bright, contrasting color for the brand name */
+    text-decoration: none;
+}
+
+.home-subtitle {
+    font-size: 1.4rem;
+    color: #e0e0e0; /* Lighter text for subtitle */
+    margin-bottom: 40px;
+    font-weight: 300;
+}
+
+/* Call to Action Buttons */
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.cta-btn {
+    padding: 15px 35px; /* Bigger buttons */
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 50px; /* Pill-shaped buttons */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.primary-cta {
+    background: #ffd43b; /* Primary color is bright yellow */
+    color: #2c3e50;
+    border: 2px solid #ffd43b;
+}
+
+.primary-cta:hover {
+    background: #ffc107;
+    box-shadow: 0 6px 20px rgba(255, 212, 59, 0.4);
+    transform: translateY(-2px);
+}
+
+.secondary-cta {
+    background: #ffffff;
+    color: #1abc9c;
+    border: 2px solid #ffffff;
+}
+
+.secondary-cta:hover {
+    background: #f0f0f0;
+    color: #16a085;
+    transform: translateY(-2px);
+}
+
+/* Features Section */
+.features-section {
+    padding: 30px 25px 60px;
+    max-width: 1200px; /* Allow features to take more width */
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 40px;
+    font-weight: 700;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Stronger, more modern shadow */
+    transition: transform 0.3s ease;
+    border-bottom: 4px solid #1abc9c; /* Subtle color highlight */
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.feature-card .icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.feature-card h3 {
+    color: #1abc9c;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.feature-card p {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Responsive Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .home-title {
+        font-size: 2.5rem;
+    }
+    .home-subtitle {
+        font-size: 1.1rem;
+    }
+    .hero-section {
+        padding: 60px 20px;
+    }
+}
+</style>
+
+{% endblock extra_head %}

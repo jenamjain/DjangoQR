@@ -1,0 +1,240 @@
+{% extends "core/base.html" %}
+{% block title %}Generate QR | PumpPay{% endblock title %}
+
+{% block content %}
+<div class="page-background">
+    <div class="center-container">
+        <div class="qr-card">
+            <h1 class="card-title">💰 Generate PumpPay QR Code</h1>
+
+            <form action="{% url 'generate_qr' %}" method="post" class="qr-form">
+                {% csrf_token %}
+                
+                <div class="input-group">
+                    <label for="mobile_number" class="input-label">Payer Mobile Number (Optional for QR data)</label>
+                    <input type="text" id="mobile_number" name="mobile_number"
+                           placeholder="Enter 10-digit mobile number"
+                           required pattern="\d{10}"
+                           class="form-input">
+                </div>
+
+                <div class="input-group">
+                    <label for="qr_data" class="input-label">Payment Amount or Unique ID</label>
+                    <input type="text" id="qr_data" name="qr_data"
+                           placeholder="e.g., ₹500.00 or Invoice-12345"
+                           required
+                           class="form-input">
+                </div>
+                       
+                <button type="submit" class="generate-btn">
+                    ✨ Create QR Code
+                </button>
+            </form>
+
+            <div class="qr-preview">
+                {% if qr_image_url %}
+                <hr class="divider">
+                <h2 class="preview-heading">✅ Your Code is Ready!</h2>
+                
+                <div class="qr-display bounce-in">
+                    <img src="{{ qr_image_url }}" alt="Generated QR Code" class="qr-image">
+                </div>
+                
+                <a href="{{ qr_image_url }}" download class="download-button">
+                    ⬇️ Download QR Code Image
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block extra_head %}
+<style>
+/* --- Keyframe Animation for QR Code Appearance --- */
+@keyframes bounceIn {
+    0%, 20%, 40%, 60%, 80%, 100% {
+        transition-timing-function: cubic-bezier(0.215, .61, .355, 1);
+        transform: translate3d(0, 0, 0);
+    }
+    0% { opacity: 0; transform: scale3d(.3, .3, .3); }
+    20% { transform: scale3d(1.1, 1.1, 1.1); }
+    40% { transform: scale3d(.9, .9, .9); }
+    60% { opacity: 1; transform: scale3d(1.03, 1.03, 1.03); }
+    80% { transform: scale3d(.97, .97, .97); }
+    100% { opacity: 1; transform: scale3d(1, 1, 1); }
+}
+
+/* Page-level styling for consistent look */
+.page-background {
+    background: #f4f7f9; 
+    padding: 50px 0;
+    min-height: calc(100vh - 100px); 
+}
+
+/* Center the main card */
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 20px;
+}
+
+/* Main QR Card Styling */
+.qr-card {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 16px; /* Slightly larger radius */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+    width: 100%;
+    max-width: 480px; /* Slightly wider card */
+    text-align: center;
+    border-top: 5px solid #1abc9c; /* Eye-catching brand color accent */
+}
+
+.card-title {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-weight: 800;
+}
+
+/* Form Styling */
+.qr-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Input Grouping for Structure */
+.input-group {
+    text-align: left;
+}
+
+.input-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.form-input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f9f9f9; /* Light input background */
+}
+
+/* Enhanced Focus Effect */
+.form-input:focus {
+    border-color: #1abc9c;
+    background: #ffffff;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(26, 188, 156, 0.3); /* Stronger focus ring */
+    transform: translateY(-1px); /* Subtle lift */
+}
+
+/* Generate Button Styling (Primary CTA color) */
+.generate-btn {
+    padding: 15px;
+    background: #1abc9c; 
+    color: white;
+    font-size: 1.15rem; /* Larger font */
+    font-weight: 700;
+    border: none;
+    border-radius: 50px; /* Pill shape */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 25px;
+    box-shadow: 0 4px 15px rgba(26, 188, 156, 0.4);
+}
+
+.generate-btn:hover {
+    background: #16a085;
+    transform: scale(1.02); /* Pop out on hover */
+    box-shadow: 0 6px 20px rgba(26, 188, 156, 0.5);
+}
+
+/* QR Preview Area */
+.qr-preview {
+    margin-top: 30px;
+}
+
+.divider {
+    border: 0;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 30px 0;
+}
+
+.preview-heading {
+    font-size: 1.4rem;
+    color: #16a085; /* Green heading color */
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+/* QR Code Image Container */
+.qr-display {
+    padding: 15px;
+    background: #ffffff;
+    border: 3px solid #ffd43b; /* Bold yellow border for emphasis */
+    border-radius: 12px;
+    display: inline-block; 
+    margin-bottom: 25px;
+    box-shadow: 0 0 15px rgba(255, 212, 59, 0.4); /* Glow effect */
+    animation: bounceIn 0.8s; /* Apply the bounce animation */
+}
+
+.qr-image {
+    width: 220px; /* Slightly larger QR code */
+    height: 220px;
+    display: block;
+}
+
+/* Download Button Styling */
+.download-button {
+    display: block;
+    width: 80%; /* Width is 80% of the card for visual balance */
+    margin: 0 auto;
+    padding: 14px;
+    background: #ffd43b; 
+    color: #2c3e50;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 3px 10px rgba(255, 212, 59, 0.4);
+}
+
+.download-button:hover {
+    background: #ffc107;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 212, 59, 0.6);
+}
+
+/* Responsive adjustments */
+@media (max-width: 550px) {
+    .qr-card {
+        padding: 30px 20px;
+    }
+    .qr-image {
+        width: 180px;
+        height: 180px;
+    }
+    .card-title {
+        font-size: 1.6rem;
+    }
+    .download-button {
+        width: 100%;
+    }
+    
+}
+</style>
+{% endblock extra_head %}

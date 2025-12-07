@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}GS Petrol Pump Payment System{% endblock title %}</title>
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Q8phWlVg0E5ldmGbQvX+Kf6d1ib+k+R8lJzBh7vWZbQkX0U6Y4a7E4sF8nGpVFmYRhfXWk9tRkHq2cI5TrxPZg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <!-- Per-page extra CSS -->
+    {% block extra_head %}{% endblock extra_head %}
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a class="brand" href="{% url 'home' %}">
+                <!-- Replace with <img src="{% static 'core/images/logo.png' %}" alt="Logo"> if you have a logo -->
+                <span class="brand-title"> PumpPay</span>
+            </a>
+
+            <nav class="main-nav" aria-label="Main navigation">
+                <button class="nav-toggle" aria-expanded="false" aria-controls="primary-navigation">
+                    <span class="sr-only">Toggle navigation</span>
+                    &#9776;
+                </button>
+
+                <ul id="primary-navigation" class="nav-list">
+                    <li class="nav-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="nav-item"><a href="{% url 'generate_qr' %}">Generate QR</a></li>
+                    <li class="nav-item"><a href="{% url 'scan_qr' %}">Scan QR</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="site-main">
+        {% block content %}{% endblock content %}
+    </main>
+
+    <footer class="site-footer">
+    <div class="container footer-content">
+        <p>&copy; {{ now.year }} Jenam Jain. All rights reserved.</p>
+        <p class="small-note">
+            Built with Django • 
+            <a href="https://github.com/jenamjain" target="_blank" rel="noopener">GitHub</a> • 
+            <a href="https://www.linkedin.com/in/jenamjain09" target="_blank" rel="noopener">LinkedIn</a>
+        </p>
+        <p class="footer-tagline">“Coding, Creativity & Coffee ☕”</p>
+    </div>
+</footer>
+
+
+    <!-- Global scripts (kept minimal) -->
+    <script>
+        // Simple nav toggle for small screens
+        (function() {
+            const btn = document.querySelector('.nav-toggle');
+            const nav = document.getElementById('primary-navigation');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', () => {
+                const expanded = btn.getAttribute('aria-expanded') === 'true';
+                btn.setAttribute('aria-expanded', String(!expanded));
+                nav.classList.toggle('nav-open');
+            });
+        })();
+    </script>
+
+    <!-- Per-page extra JS -->
+    {% block extra_js %}{% endblock extra_js %}
+</body>
+</html>

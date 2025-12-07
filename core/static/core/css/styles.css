@@ -1,0 +1,327 @@
+/* =========================
+UPDATED COLOR PALETTE:
+-- Brand Green: #1abc9c (Used for buttons, primary actions)
+-- Brand Yellow (Accent): #ffd43b (Used for headers, secondary highlights)
+-- Text/Dark: #2c3e50
+-- Background: #f4f7f9
+========================= */
+
+/* =========================
+RESET & BASE
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+html, body {
+    font-family: "Poppins", sans-serif;
+    /* Updated background color for a lighter, modern feel */
+    background-color: #f4f7f9; 
+    height: 100%;
+    display: flex;            
+    flex-direction: column;   
+    min-height: 100vh;        
+    color: #2c3e50; /* Base text color */
+}
+
+/* =========================
+HEADER + NAVBAR (MODERN & ATTRACTIVE UPDATE)
+========================= */
+.site-header {
+    /* Glassmorphism: Semi-transparent white with blur */
+    background-color: rgba(255, 255, 255, 0.95); 
+    padding: 15px 25px; 
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px); 
+    /* Updated Shadow for floating effect */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08); 
+    /* Subtle brand border */
+    border-bottom: 2px solid #1abc9c; 
+}
+
+.site-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1400px; 
+    margin: 0 auto;
+}
+
+.brand {
+    text-decoration: none; 
+}
+
+.brand-title {
+    color: #1abc9c; 
+    font-size: 28px; 
+    font-weight: 900; 
+    letter-spacing: 0px; 
+    transition: all 0.3s ease;
+}
+/* Enhanced Logo Hover Effect */
+.brand-title:hover {
+    color: #ffd43b; 
+    text-shadow: 0 0 5px rgba(255, 212, 59, 0.5); 
+}
+
+/* Navigation */
+.main-nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: #1abc9c;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.nav-toggle:active {
+    transform: scale(0.9);
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 60px; /* Increased gap for visual breathing room */
+}
+
+.nav-list a {
+    color: #2c3e50; 
+    text-decoration: none;
+    padding: 10px 0; /* Padding for click area, zero horizontal padding for underline style */
+    font-weight: 600; 
+    transition: all 0.3s ease;
+    position: relative; /* Needed for the modern underline */
+}
+
+/* Modern Trending Underline Effect */
+.nav-list a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; /* Position below the link text */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0; /* Initially hidden */
+    height: 3px; /* Thickness of the underline */
+    background-color: #ffd43b; /* Use yellow accent color */
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.nav-list a:hover::after,
+.nav-list a.active::after { /* Apply to active class if available */
+    width: 100%; /* Expands to full width on hover/active */
+}
+
+/* Optional: Style for the active link itself */
+.nav-list a.active {
+    color: #1abc9c; /* Keeps active link visible */
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+.nav-toggle {
+    display: block;
+}
+.nav-list {
+    display: none;
+    flex-direction: column;
+    /* Updated mobile menu background */
+    background: #2c3e50; 
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    position: absolute; 
+    right: 25px;
+    top: 75px; /* Adjusted position due to increased header padding */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    min-width: 150px;
+}
+.nav-list a {
+    color: #ffffff;
+    padding: 10px;
+    margin: 2px 0;
+}
+.nav-list a:hover {
+    background-color: #1abc9c;
+    color: white;
+}
+/* Ensure the modern underline doesn't interfere with mobile links */
+.nav-list a::after {
+    display: none; 
+}
+.nav-list.nav-open {
+    display: flex;
+}
+}
+
+/* ---------------------------------------------------------------------- */
+
+/* =========================
+MAIN CONTENT
+========================= */
+.site-main {
+    padding: 50px 20px; /* Increased top/bottom padding */
+    flex: 1; 
+}
+
+.container {
+    background: #ffffff;
+    padding: 40px; /* Increased padding */
+    max-width: 500px; /* Slightly wider container */
+    margin: auto;
+    border-radius: 16px; /* Larger radius */
+    /* Stronger, layered shadow for depth */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15), 0 0 0 5px rgba(26, 188, 156, 0.1); 
+    text-align: center;
+    animation: fadeIn 0.6s ease-out; /* Slower, smoother animation */
+    border-top: 6px solid #1abc9c; /* Brand color accent line */
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+/* Headings */
+.container h1, .container h2 {
+    color: #2c3e50; /* Darker, more professional heading color */
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+/* =========================
+FORM STYLING
+========================= */
+form input[type="text"],
+form input[type="file"] {
+    width: 100%;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    font-size: 16px;
+    background: #fcfcfc;
+    transition: all 0.3s ease;
+}
+
+/* Enhanced Focus State (Eye-catching) */
+form input:focus {
+    border-color: #ffd43b; /* Yellow border on focus */
+    box-shadow: 0 0 0 4px rgba(255, 212, 59, 0.4); /* Glowing effect */
+    background: #ffffff;
+    outline: none;
+    transform: translateY(-1px); /* Subtle lift */
+}
+
+/* Primary Button Styling */
+form button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 30px; /* More vertical space */
+    background-color: #1abc9c; /* Signature brand green */
+    color: #ffffff;
+    border: none;
+    border-radius: 50px; /* Pill shape for modern look */
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    /* Button shadow */
+    box-shadow: 0 6px 15px rgba(26, 188, 156, 0.4); 
+}
+
+form button:hover {
+    background-color: #16a085;
+    transform: translateY(-3px); /* More aggressive lift on hover */
+    box-shadow: 0 8px 20px rgba(26, 188, 156, 0.6);
+}
+
+/* =========================
+QR PREVIEW
+========================= */
+.qr-preview {
+    margin-top: 35px;
+    padding: 30px;
+    background: #fdfdfd;
+    border-radius: 16px;
+    /* Stronger inner shadow */
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+    border: 1px solid #e0e0e0;
+}
+
+.qr-preview img {
+    max-width: 220px; /* Slightly larger image */
+    margin-top: 15px;
+    /* Highlight the QR image */
+    border: 4px solid #ffd43b;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+/* Download Button Styling (Secondary CTA color) */
+.download-button {
+    display: inline-block;
+    background: #ffd43b; /* Yellow accent color */
+    padding: 12px 25px;
+    color: #2c3e50;
+    border-radius: 50px; /* Pill shape */
+    margin-top: 20px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(255, 212, 59, 0.4);
+}
+
+.download-button:hover {
+    background: #ffc107;
+    transform: scale(1.03);
+    box-shadow: 0 5px 15px rgba(255, 212, 59, 0.6);
+}
+
+/* ==========================
+          FOOTER
+========================== */
+.site-footer {
+    padding: 30px 15px; /* Increased padding */
+    background-color: #ffffff;
+    color: #555; /* Subtle text color */
+    text-align: center;
+    font-size: 15px;
+    /* Clean, professional border top */
+    border-top: 3px solid #1abc9c; 
+    margin-top: auto; 
+}
+
+.site-footer a {
+    color: #1abc9c;
+    text-decoration: none;
+    font-weight: 600;
+    margin: 0 5px;
+    transition: color 0.3s;
+}
+
+.site-footer a:hover {
+    color: #16a085;
+    text-decoration: underline;
+}
+
+.footer-tagline {
+    margin-top: 10px;
+    font-size: 14px;
+    font-style: italic;
+    color: #2c3e50;
+    font-weight: 500;
+}
